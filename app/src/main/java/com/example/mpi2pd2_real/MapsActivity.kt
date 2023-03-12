@@ -60,29 +60,26 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        mMap.setOnMyLocationChangeListener { location ->
-            val latLng = LatLng(location.latitude, location.longitude)
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
-        }
-
-        // Request location updates
+        // Set camera to user's current location at start
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+            ) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
+            ) == PackageManager.PERMISSION_GRANTED
         ) {
-            return
+            mMap.isMyLocationEnabled = true
+            mMap.setOnMyLocationChangeListener { location ->
+                val latLng = LatLng(location.latitude, location.longitude)
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+                mMap.setOnMyLocationChangeListener(null) // remove listener after first update
+            }
         }
-        mMap.isMyLocationEnabled = true
 
-        mMap.myLocation?.let { location ->
-            val latLng = LatLng(location.latitude, location.longitude)
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
-        }
+        // Allow user to move camera freely around the map
+        mMap.uiSettings.isZoomControlsEnabled = true
+        mMap.uiSettings.isCompassEnabled = true
+        mMap.uiSettings.isMyLocationButtonEnabled = true
     }
-
-
 }
