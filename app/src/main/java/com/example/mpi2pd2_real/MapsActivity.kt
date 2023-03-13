@@ -65,7 +65,21 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        // Set camera to user's current location at start
+        val markerOptions1 = MarkerOptions().position(LatLng(56.9465, 24.1052))
+            .title("Riga")
+            .snippet("Capital of Latvia")
+        mMap.addMarker(markerOptions1)
+
+        val markerOptions2 = MarkerOptions().position(LatLng(56.9496, 24.1052))
+            .title("National Library of Latvia")
+            .snippet("A cultural, scientific, and educational institution")
+        mMap.addMarker(markerOptions2)
+
+        val markerOptions3 = MarkerOptions().position(LatLng(56.9475, 24.1097))
+            .title("Riga Cathedral")
+            .snippet("A medieval church in the old town of Riga")
+        mMap.addMarker(markerOptions3)
+
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -78,38 +92,20 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             mMap.setOnMyLocationChangeListener { location ->
                 val latLng = LatLng(location.latitude, location.longitude)
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
-                mMap.setOnMyLocationChangeListener(null) // remove listener after first update
+                mMap.setOnMyLocationChangeListener(null)
             }
         }
 
-        // Add markers for locations in Latvia
-// Add markers for locations in Latvia
-        val markerOptions1 = MarkerOptions().position(LatLng(56.9465, 24.1052)).title("Riga").snippet("Capital of Latvia")
-        mMap.addMarker(markerOptions1)
-
-        val markerOptions2 = MarkerOptions().position(LatLng(56.9496, 24.1052)).title("National Library of Latvia").snippet("A cultural, scientific, and educational institution")
-        mMap.addMarker(markerOptions2)
-
-        val markerOptions3 = MarkerOptions().position(LatLng(56.9475, 24.1097)).title("Riga Cathedral").snippet("A medieval church in the old town of Riga")
-        mMap.addMarker(markerOptions3)
-
-// Set on marker click listener
         mMap.setOnMarkerClickListener { marker ->
-            // Create a dialog to display the marker title and description
             val dialog = AlertDialog.Builder(this)
                 .setTitle(marker.title)
                 .setMessage(marker.snippet)
                 .setPositiveButton("OK", null)
                 .create()
-
-            // Show the dialog
-            dialog.show()
-
-            // Return true to indicate that the click event has been handled
+                dialog.show()
             true
         }
 
-        // Allow user to move camera freely around the map
         mMap.uiSettings.isZoomControlsEnabled = true
         mMap.uiSettings.isCompassEnabled = true
         mMap.uiSettings.isMyLocationButtonEnabled = true
