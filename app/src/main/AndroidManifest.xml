@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MPI2PD2_REAL"
         tools:targetApi="31">
+        <activity
+            android:name=".ApiActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
