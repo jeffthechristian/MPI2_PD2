@@ -66,13 +66,28 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         val markerOptions2 = MarkerOptions().position(LatLng(56.9496, 24.1052))
             .title("National Library of Latvia")
-            .snippet("A cultural, scientific, and educational institution")
+            .snippet("Kulturāli zinātniska mācību institūcija (kaut kā tā)")
         mMap.addMarker(markerOptions2)
 
         val markerOptions3 = MarkerOptions().position(LatLng(56.9475, 24.1097))
             .title("Riga Cathedral")
-            .snippet("A medieval church in the old town of Riga")
+            .snippet("Vidusslaiku baznīca, kura atrodas Vecrīgā!")
         mMap.addMarker(markerOptions3)
+
+        val markerOptions1 = MarkerOptions().position(LatLng(57.5315, 25.4271))
+            .title("Lidl Valmiera")
+            .snippet("Lidl, kas atrodas Valmierā :O")
+        mMap.addMarker(markerOptions1)
+
+        val markerOptions5 = MarkerOptions().position(LatLng(56.484315, 21.014903))
+            .title("Lidl Liepāja")
+            .snippet("Lidl, kas atrodas Liepājā :O")
+        mMap.addMarker(markerOptions5)
+
+        val markerOptions6 = MarkerOptions().position(LatLng(56.6692, 23.7623))
+            .title("Lidl Jelgava")
+            .snippet("Lidl, kas atrodas Jelgavā :O")
+        mMap.addMarker(markerOptions6)
 
         if (ActivityCompat.checkSelfPermission(
                 this,

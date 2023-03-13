@@ -58,7 +58,7 @@ class ApiActivity : AppCompatActivity() {
                 val listData = mutableListOf<String>()
                 for (i in 0 until jsonArray.length()) {
                     val jsonObject = jsonArray.getJSONObject(i)
-                    listData.add(jsonObject.getString("character")+ " from " + jsonObject.getString("anime") + " said: " + jsonObject.getString("quote"))
+                    listData.add(jsonObject.getString("character")+ " from " + jsonObject.getString("anime") + " said: \n\n -  " + jsonObject.getString("quote") + "\n")
                 }
                 return listData
             }
