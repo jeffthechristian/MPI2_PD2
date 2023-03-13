@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.mpi2pd2_real.databinding.ActivityMapsBinding
@@ -14,6 +15,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 
 @Suppress("DEPRECATION")
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -78,6 +80,33 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
                 mMap.setOnMyLocationChangeListener(null) // remove listener after first update
             }
+        }
+
+        // Add markers for locations in Latvia
+// Add markers for locations in Latvia
+        val markerOptions1 = MarkerOptions().position(LatLng(56.9465, 24.1052)).title("Riga").snippet("Capital of Latvia")
+        mMap.addMarker(markerOptions1)
+
+        val markerOptions2 = MarkerOptions().position(LatLng(56.9496, 24.1052)).title("National Library of Latvia").snippet("A cultural, scientific, and educational institution")
+        mMap.addMarker(markerOptions2)
+
+        val markerOptions3 = MarkerOptions().position(LatLng(56.9475, 24.1097)).title("Riga Cathedral").snippet("A medieval church in the old town of Riga")
+        mMap.addMarker(markerOptions3)
+
+// Set on marker click listener
+        mMap.setOnMarkerClickListener { marker ->
+            // Create a dialog to display the marker title and description
+            val dialog = AlertDialog.Builder(this)
+                .setTitle(marker.title)
+                .setMessage(marker.snippet)
+                .setPositiveButton("OK", null)
+                .create()
+
+            // Show the dialog
+            dialog.show()
+
+            // Return true to indicate that the click event has been handled
+            true
         }
 
         // Allow user to move camera freely around the map
