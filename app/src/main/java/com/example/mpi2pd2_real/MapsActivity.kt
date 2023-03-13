@@ -65,11 +65,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        val markerOptions1 = MarkerOptions().position(LatLng(56.9465, 24.1052))
-            .title("Riga")
-            .snippet("Capital of Latvia")
-        mMap.addMarker(markerOptions1)
-
         val markerOptions2 = MarkerOptions().position(LatLng(56.9496, 24.1052))
             .title("National Library of Latvia")
             .snippet("A cultural, scientific, and educational institution")
