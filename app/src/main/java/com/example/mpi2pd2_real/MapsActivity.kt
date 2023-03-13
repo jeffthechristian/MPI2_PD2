@@ -6,7 +6,6 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.mpi2pd2_real.databinding.ActivityMapsBinding
@@ -89,16 +88,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
                 mMap.setOnMyLocationChangeListener(null)
             }
-        }
-
-        mMap.setOnMarkerClickListener { marker ->
-            val dialog = AlertDialog.Builder(this)
-                .setTitle(marker.title)
-                .setMessage(marker.snippet)
-                .setPositiveButton("OK", null)
-                .create()
-                dialog.show()
-            true
         }
 
         mMap.uiSettings.isZoomControlsEnabled = true
